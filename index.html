@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a0dad, #9b30ff);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .cake-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            /* tambahkan ini */
+            padding-top: 60px;
+            animation: fadeIn 2s ease forwards;
+        }
+
+        .cake {
+            position: relative;
+            margin: 30px auto 0;
+            /* tengah horizontal */
+            transform: scale(0.9);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .mainTeks {
+            margin-bottom: 2vh;
+        }
+
+        h1 {
+            font-size: 20px;
+            padding-bottom: 1vh;
+        }
+
+        .typing-text {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            font-size: 6vw;
+            animation: typing 3s steps(22, end) forwards;
+        }
+
+        .praise-wrapper {
+            margin-top: 10px;
+            padding: 10px 0;
+            padding-top: 3px;
+            background: linear-gradient(to right, #9848f9, #8f55c5);
+            border-radius: 10px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 500px;
+            height: 25px;
+        }
+
+        .praise-text {
+            display: inline-block;
+            white-space: nowrap;
+            color: white;
+            font-size: 12px;
+            padding-left: 100%;
+            animation: slideInText 15s linear infinite;
+        }
+
+        @keyframes slideInText {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .cursor {
+            display: inline-block;
+            border-right: 2px solid white;
+            animation: blink 0.7s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 20ch;
+            }
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: white;
+            }
+        }
+
+        .cake {
+            position: relative;
+            margin-top: 30px;
+            transform: scale(0.9);
+        }
+
+        .layer {
+            width: 160px;
+            height: 40px;
+            background: linear-gradient(to bottom, #c49cff, #b366ff);
+            border-radius: 10px;
+            margin-bottom: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .icing {
+            width: 160px;
+            height: 10px;
+            background: repeating-linear-gradient(45deg, #fff, #fff 5px, #e0ccff 5px, #e0ccff 10px);
+            border-radius: 5px;
+            margin-top: -5px;
+        }
+
+        .candle {
+            width: 10px;
+            height: 30px;
+            background: orange;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+            animation: slideIn 0.5s ease-out forwards;
+            cursor: pointer;
+        }
+
+        .flame {
+            width: 14px;
+            height: 20px;
+            background: radial-gradient(ellipse at center, gold 0%, orange 80%, transparent 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: flicker 0.2s infinite;
+            opacity: 0.9;
+        }
+
+        .cake-instruction {
+            margin-bottom: 2vh;
+            font-size: 14px;
+            font-style: italic;
+            color: #ffebff;
+        }
+
+        .fruit,
+        .whipped {
+            position: absolute;
+        }
+
+        .fruit {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: red;
+            top: 5px;
+        }
+
+        .fruit:nth-of-type(1) {
+            left: 60px;
+        }
+
+        .fruit:nth-of-type(2) {
+            left: 75px;
+        }
+
+        .fruit:nth-of-type(3) {
+            left: 145px;
+        }
+
+        .whipped {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            bottom: 5px;
+        }
+
+        .whipped:nth-of-type(4) {
+            left: 60px;
+        }
+
+        .whipped:nth-of-type(5) {
+            left: 75px;
+        }
+
+        .whipped:nth-of-type(6) {
+            left: 145px;
+        }
+
+        .balloon {
+            width: 20px;
+            height: 30px;
+            background: radial-gradient(circle at 50% 30%, #c080ff, #6a0dad);
+            border-radius: 50% 50% 45% 45%;
+            animation: balloon-float 4s ease-in-out infinite;
+            position: absolute;
+        }
+
+        .balloon::after {
+            content: "";
+            width: 2px;
+            height: 20px;
+            background: white;
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .balloon.left {
+            top: 10%;
+            left: -16%;
+        }
+
+        .balloon.right {
+            top: 10%;
+            right: -16%;
+        }
+
+        .confetti-top div {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            position: absolute;
+            animation: confetti-fall 5s linear infinite;
+        }
+
+        .confetti-top div:nth-child(1) {
+            left: 10%;
+            top: -10px;
+            background: red;
+        }
+
+        .confetti-top div:nth-child(2) {
+            left: 25%;
+            top: -20px;
+            background: orange;
+        }
+
+        .confetti-top div:nth-child(3) {
+            left: 40%;
+            top: -15px;
+            background: yellow;
+        }
+
+        .confetti-top div:nth-child(4) {
+            left: 60%;
+            top: -5px;
+            background: lime;
+        }
+
+        .confetti-top div:nth-child(5) {
+            left: 75%;
+            top: -25px;
+            background: cyan;
+        }
+
+        .confetti-top div:nth-child(6) {
+            left: 90%;
+            top: -18px;
+            background: magenta;
+        }
+
+        @keyframes flicker {
+            0% {
+                transform: translateX(-50%) scaleY(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateX(-50%) scaleY(1.1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateX(-50%) scaleY(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                top: -70px;
+                opacity: 0;
+            }
+
+            to {
+                top: -30px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        @keyframes balloon-float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .button-animate {
+            transition: transform 0.3s ease;
+        }
+
+        .button-animate:active {
+            transform: scale(0.95) rotate(2deg);
+        }
+
+        .gallery-container {
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 40px;
+            padding: 0 10px;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+            animation: fadeIn 2s ease forwards;
+        }
+
+        .gallery-item {
+            flex: 1 1 calc(50% - 20px);
+            max-width: calc(50% - 20px);
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (min-width: 600px) {
+            .gallery-item {
+                flex: 1 1 calc(33.33% - 20px);
+                max-width: calc(33.33% - 20px);
+            }
+        }
+
+        @media (min-width: 900px) {
+            .gallery-item {
+                flex: 1 1 calc(25% - 20px);
+                max-width: calc(25% - 20px);
+            }
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .back-button {
+            margin: 20px auto;
+            background-color: #6a0dad;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+        }
+
+        .question {
+            font-family: arial;
+            font-size: 15px;
+        }
+
+        .music-select {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .music-select label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .copyright {
+            bottom: 0;
+            font-size: 12px;
+            width: 100%;
+            height: 30px;
+            /* Contoh tinggi footer 60px */
+        }
+    </style>
+</head>
+
+<body>
+    <audio id="birthdaySong" src="musik/lagu1.mp3" preload="auto"></audio>
+    <div id="cakeContainer" class="cake-container hidden">
+        <section class="mainTeks">
+            <h1>Selamat Ulang Tahun Ke 19!</h1>
+            <h3 class="typing-text">PUTRI REGINA KRISTI</h3>
+            <p>Semoga harimu menyenangkan 🎉</p>
+            <div class="praise-wrapper">
+                <div class="praise-text">Kamu adalah sosok yang luar biasa, penyayang, dan selalu membawa
+                    kebahagiaan bagi orang-orang di sekitarmu🌟, meskipun kadang sering tantrum serta nesuan.</div>
+            </div>
+        </section>
+
+        <p class="cake-instruction">(Klik api lilin untuk melihat kejutan 🎁)</p>
+
+        <div class="cake">
+            <div class="layer">
+                <div class="candle" onclick="showGallery()">
+                    <div class="flame"></div>
+                </div>
+                <div class="fruit"></div>
+                <div class="fruit"></div>
+                <div class="fruit"></div>
+                <div class="whipped"></div>
+                <div class="whipped"></div>
+                <div class="whipped"></div>
+
+            </div>
+            <div class="icing"></div>
+            <div class="layer"></div>
+            <div class="icing"></div>
+            <div class="layer"></div>
+            <div class="icing"></div>
+            <div class="confetti-top">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="balloon left"></div>
+            <div class="balloon right"></div>
+        </div>
+    </div>
+
+    <div id="galleryContainer" class="gallery-container">
+        <h3>Berikut adalah beberapa gambarmu : </h3>
+        <div class="gallery-item"><img src="image/foto1.jpg" alt="Foto 1"></div>
+        <div class="gallery-item"><img src="image/foto2.jpg" alt="Foto 2"></div>
+        <div class="gallery-item"><img src="image/foto3.jpg" alt="Foto 3"></div>
+        <div class="gallery-item"><img src="image/foto4.jpg" alt="Foto 4"></div>
+        <div class="gallery-item"><img src="image/foto5.jpg" alt="Foto 5"></div>
+        <div class="gallery-item"><img src="image/foto6.jpg" alt="Foto 6"></div>
+        <div class="gallery-item"><img src="image/foto7.jpg" alt="Foto 7"></div>
+        <div class="gallery-item"><img src="image/foto8.jpg" alt="Foto 8"></div>
+        <div class="gallery-item"><img src="image/foto9.jpg" alt="Foto 9"></div>
+        <div class="gallery-item"><img src="image/foto10.jpg" alt="Foto 10"></div>
+        <p class="question">Semoga dengan bertambahnya umur bisa membuat seorang regina bisa menjadi pribadi yang lebih
+            baik dari sebelumnya serta semakin dewasa cara berpikirnya.
+        </p>
+        <div class="music-select">
+            <label for="musicChoice">Ganti Lagu Favoritmu :</label>
+            <select id="musicChoice" onchange="changeSong(this.value)">
+                <option value="musik/lagu1.mp3">Lagu Ultah Default</option>
+                <option value="musik/lagu-ultah2.mp3">Lagu Ultah Favoritmu</option>
+            </select>
+        </div>
+        <button class="back-button" onclick="backToCake()">Kembali</button>
+        <p class="copyright"> &copy; 2025, Web by GC. All Right Reserved</p>
+    </div>
+
+    <script>
+        function moveButton(button) {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            button.style.position = 'absolute';
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+            button.classList.add('button-animate');
+        }
+
+        function showConfirmAlert() {
+            const container = document.createElement('div');
+            container.innerHTML = `
+                <p>Apakah nama kamu <strong>GINAW</strong>?</p>
+                <div style="margin-top: 1rem; display: flex; gap: 10px; justify-content: center; position: relative;">
+                  <button id="yesBtn" class="button-animate" style="padding: 10px 20px; background-color: #6a0dad; color: white; border: none; border-radius: 5px;">Iya</button>
+                  <button id="noBtn" class="button-animate" style="padding: 10px 20px; background-color: #ccc; color: black; border: none; border-radius: 5px;">Tidak</button>
+                </div>
+            `;
+            Swal.fire({
+                title: 'Konfirmasi Nama',
+                html: container,
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                didOpen: () => {
+                    const noBtn = document.getElementById('noBtn');
+                    const yesBtn = document.getElementById('yesBtn');
+                    noBtn.addEventListener('click', () => moveButton(noBtn));
+                    yesBtn.addEventListener('click', () => {
+                        Swal.close();
+                        document.getElementById('cakeContainer').style.display = 'flex';
+                        const song = document.getElementById('birthdaySong');
+                        song.volume = 1.0;
+                        song.play().catch(error => {
+                            console.warn('Autoplay diblokir:', error);
+                        });
+                    });
+                }
+            });
+        }
+
+        function showGallery() {
+            document.getElementById('cakeContainer').style.display = 'none';
+            document.getElementById('galleryContainer').style.display = 'flex';
+        }
+
+        function backToCake() {
+            document.getElementById('galleryContainer').style.display = 'none';
+            document.getElementById('cakeContainer').style.display = 'flex';
+        }
+
+        function changeSong(fileName) {
+            const song = document.getElementById('birthdaySong');
+            song.pause();
+            song.src = fileName;
+            song.play().catch(error => console.warn('Gagal memutar lagu baru:', error));
+        }
+
+        window.onload = showConfirmAlert;
+    </script>
+</body>
+
+</html>
